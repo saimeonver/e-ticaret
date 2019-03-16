@@ -1,0 +1,29 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>And Eticaret Admin Girisi</title>
+</head>
+<body>
+    <div>
+        <form method="post">
+            @Html.Label("Email")
+            @Html.TextBox("Email")
+            <br />
+            @Html.Label("Sifreniz")
+            @Html.Password("Password")
+            <br />
+            <button type="submit">Giris Yap</button>
+
+        </form>
+
+
+    </div>
+</body>
+</html>
