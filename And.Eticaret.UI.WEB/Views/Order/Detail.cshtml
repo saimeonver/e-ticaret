@@ -1,0 +1,71 @@
+﻿@model And.Eticaret.Core.Model.Entity.Order
+@{
+                /**/
+
+                ViewBag.Title = "Siparis Detayi";
+}
+
+<h2>@Model.ID Nolu Siparisinizin Durumu:@Model.Status.Name</h2>
+<hr />
+<b>Banka Bilgileri</b>
+<table>
+    <tr>
+        <td>Banka</td>
+        <td>Banka Ismi</td>
+    </tr>
+    <tr>
+        <td>Iban</td>
+        <td>TR01225458484545</td>
+    </tr>
+    <tr>
+        <td>Alici Adi</td>
+        <td>Firma Bilgileri</td>
+    </tr>
+</table>
+@{
+    if (Model.StatusID == 1)
+    {
+        <a href="/Order/Pay?id=@Model.ID" class="btn btn-success">Odeme Yaptim</a>
+    }
+}
+
+<hr />
+<b>Siparis Bilgileri</b>
+<table>
+    <tr>
+        <td>Toplam</td>
+        <td>@Model.TotalPrice.ToString("##,## ₺")</td>
+    </tr>
+    <tr>
+        <td>Urunler Toplami</td>
+        <td>@Model.TotalProductPrice.ToString("##,## ₺")</td>
+    </tr>
+    <tr>
+        <td>Indirim Toplami</td>
+        <td>@Model.TotalDiscount.ToString("##,## ₺")</td>
+    </tr>
+    <tr>
+        <td>Vergi Toplami</td>
+        <td>@Model.TotalTaxPrice.ToString("##,## ₺")</td>
+    </tr>
+</table>
+<hr />
+<b>Urunler</b>
+<table>
+    <tr>
+        <td>Urun</td>
+        <td>Adet</td>
+    </tr>
+    @{
+        foreach (var item in Model.OrderProducts)
+        {
+            var p = new And.Eticaret.Core.Model.AndDB().Products.Where(x => x.ID == item.ProductID).FirstOrDefault();
+            <tr>
+                <td>@p.Name</td>
+                <td>@item.Quantity</td>
+            </tr>
+        }
+    }
+</table>
+
+

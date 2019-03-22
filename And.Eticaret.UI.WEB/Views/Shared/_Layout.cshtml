@@ -1,0 +1,70 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <script src="~/Scripts/modernizr-2.6.2.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("E-ticaret Projem", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse" style="float:left">
+                <ul class="nav navbar-nav">
+                    @Html.Action("GetMenu", "Home")
+                </ul>
+            </div>
+            <div style="float:right;color:white">
+                @{
+                    if (Session["LoginUser"] == null)
+                    {
+                        <p>
+                            <a href="Uye-giris/">Uye Giris</a> |
+                            <a href="Uye-Kayit/">Uye Kayit</a>
+                        </p>
+                    }
+                    else
+                    {//en son bunu yaptim
+                        var user = Session["LoginUser"] as And.Eticaret.Core.Model.Entity.User;
+                        <p>
+                            Merhaba @user.Name @user.LastName
+                            <br />
+                            <a href="/ProfiliGoster">Profilim</a> |
+                            <a href="/Sepetim">Sepetim</a> |
+                            <a href="/Siparislerim">Siparislerim</a> |
+                        </p>
+                    }
+                }
+
+            </div>
+
+        </div>
+    </div>
+
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+        </footer>
+    </div>
+
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    @RenderSection("script", false)@*//her zaman bu sectioni gostermemesi icin false dedim*@
+</body>
+</html>
